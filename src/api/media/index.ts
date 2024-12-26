@@ -25,3 +25,7 @@ export const uploadMediaFile = async (file: File): Promise<MediaFile> => {
   formData.append("file", file);
   return $api.post("/home/upload", formData).then((res) => res.data);
 };
+
+export const deleteMediaFile = async (id: number) => {
+  return $api.delete(`/home/${id}`).then((res) => res.data);
+};

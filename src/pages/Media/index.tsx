@@ -1,9 +1,10 @@
-import { getAllMediaFiles, getPhotoMedia, getVideoMedia, uploadMediaFile } from "@/api/media";
+import { deleteMediaFile, getAllMediaFiles, getPhotoMedia, getVideoMedia, uploadMediaFile } from "@/api/media";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { MediaFile } from "@/types";
 import { useEffect, useState } from "react";
 import { categories } from "@/constants";
+import Trash from "@/assets/icons/trash.svg?react";
 
 const Media = () => {
   const [media, setMedia] = useState<MediaFile[]>([]);
@@ -32,14 +33,23 @@ const Media = () => {
     }
   };
 
+  const handleCategories = () => {
+    if (category == "Видео") fetchVideos();
+    if (category == "Фото") fetchPhotos();
+    if (category == "Все медиафайлы") fetchFiles();
+  };
+
+  const onDeleteClick = async (id: number) => {
+    await deleteMediaFile(id);
+    handleCategories();
+  };
+
   useEffect(() => {
     fetchFiles();
   }, []);
 
   useEffect(() => {
-    if (category == "Видео") fetchVideos();
-    if (category == "Фото") fetchPhotos();
-    if (category == "Все медиафайлы") fetchFiles();
+    handleCategories();
   }, [category]);
 
   return (
@@ -73,7 +83,16 @@ const Media = () => {
                   height={368}
                 />
               )}
-              <p className="text-center text-[20px] ">{item.name}</p>
+              <div className="flex items-center gap-x-2 justify-center">
+                <p className="text-center text-[20px] ">
+                  {item.name.split(".")[0].slice(0, 6)}.{item.name.split(".")[1]}
+                </p>
+                <Trash
+                  onClick={() => onDeleteClick(item.id)}
+                  width={30}
+                  height={30}
+                />
+              </div>
             </div>
           ))}
         </div>

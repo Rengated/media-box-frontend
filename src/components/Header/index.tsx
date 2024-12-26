@@ -1,6 +1,5 @@
 import Add from "@/assets/icons/add.svg?react";
 import Logout from "@/assets/icons/logout.svg?react";
-import Trash from "@/assets/icons/trash.svg?react";
 import ImportContent from "@/assets/images/import.png";
 import React, { useRef, useState } from "react";
 import "./header.css";

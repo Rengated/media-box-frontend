@@ -6,8 +6,18 @@ interface MediaFilesResponse {
   files: MediaFile[];
 }
 
+type FilteredResponse = MediaFile[];
+
 export const getAllMediaFiles = async (): Promise<MediaFilesResponse> => {
   return $api.get("/home").then((res) => res.data);
+};
+
+export const getVideoMedia = async (): Promise<FilteredResponse> => {
+  return $api.get("/home/videos").then((res) => res.data);
+};
+
+export const getPhotoMedia = async (): Promise<FilteredResponse> => {
+  return $api.get("/home/photos").then((res) => res.data);
 };
 
 export const uploadMediaFile = async (file: File): Promise<MediaFile> => {

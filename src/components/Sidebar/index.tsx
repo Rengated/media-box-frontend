@@ -2,8 +2,12 @@ import MediaBox from "@/assets/icons/logo.svg?react";
 import { categories } from "@/constants";
 import { useState } from "react";
 
-const Sidebar: React.FC = () => {
-  const [currentCategories, setCategories] = useState(categories[0]);
+interface SidebarProps {
+  currentCategories: string;
+  setCategories: (category: string) => void;
+}
+const Sidebar: React.FC<SidebarProps> = (props) => {
+  const { currentCategories, setCategories } = props;
 
   const onSwitchTab = (category: string) => {
     setCategories(category);

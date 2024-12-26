@@ -1,4 +1,4 @@
-import { getAllMediaFiles, uploadMediaFile } from "@/api/media";
+import { getAllMediaFiles, getPhotoMedia, getVideoMedia, uploadMediaFile } from "@/api/media";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { MediaFile } from "@/types";
@@ -14,6 +14,16 @@ const Media = () => {
     setMedia(reponse.files);
   };
 
+  const fetchVideos = async () => {
+    const reponse = await getVideoMedia();
+    setMedia(reponse);
+  };
+
+  const fetchPhotos = async () => {
+    const reponse = await getPhotoMedia();
+    setMedia(reponse);
+  };
+
   const onImportChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files?.length != 0) {
@@ -26,9 +36,18 @@ const Media = () => {
     fetchFiles();
   }, []);
 
+  useEffect(() => {
+    if (category == "Видео") fetchVideos();
+    if (category == "Фото") fetchPhotos();
+    if (category == "Все медиафайлы") fetchFiles();
+  }, [category]);
+
   return (
     <div className="flex bg-gray-100">
-      <Sidebar />
+      <Sidebar
+        setCategories={setCategories}
+        currentCategories={category}
+      />
       <div className="flex flex-col w-full">
         <Header onChange={onImportChange} />
         <div className="grid grid-cols-auto-fill-368 grid-rows-auto gap-20 w-full mx-auto justify-center py-[40px] ">

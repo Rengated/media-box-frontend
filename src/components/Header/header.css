@@ -1,0 +1,7 @@
+.add{
+    @apply cursor-pointer hover:fill-gray-600 hover:stroke-white;
+}
+
+.add:hover path{
+    stroke: white;
+}

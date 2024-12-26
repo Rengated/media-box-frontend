@@ -1,1 +1,1 @@
-export const categories = ["Фото", "Все медиафайлы"];
+export const categories = ["Все медиафайлы", "Фото", "Видео"];

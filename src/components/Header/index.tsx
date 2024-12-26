@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ onChange }) => {
     <header className="w-full pt-25 flex border-b-2 border-solid border-l-0 border-r-0 border-t-0 border-gray-500 pt-[100px] pb-2.5">
       <input
         className="hidden"
-        accept="image/*"
+        accept="image/*;video/*"
         type="file"
         onChange={onChange}
         ref={inputRef}

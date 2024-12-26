@@ -34,7 +34,7 @@ const Media = () => {
             <div key={item.path}>
               <img
                 className="min-w-[368px] aspect-square	mb-2"
-                src={item.path.replace("minio", "localhost")}
+                src={item.path.replace("minio", "localhost").split("?")[0]}
                 width={368}
                 height={368}
               />

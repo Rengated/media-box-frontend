@@ -4,6 +4,7 @@ import Trash from "@/assets/icons/trash.svg?react";
 import ImportContent from "@/assets/images/import.png";
 import React, { useRef, useState } from "react";
 import "./header.css";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
@@ -12,6 +13,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -23,6 +25,11 @@ const Header: React.FC<HeaderProps> = ({ onChange }) => {
 
   const onImportFile = () => {
     inputRef.current?.click();
+  };
+
+  const onLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
@@ -59,8 +66,10 @@ const Header: React.FC<HeaderProps> = ({ onChange }) => {
           )}
         </div>
         <div className="flex items-center gap-x-2">
-          <Logout className="cursor-pointer " />
-          <Trash className="cursor-pointer " />
+          <Logout
+            className="cursor-pointer "
+            onClick={onLogout}
+          />
         </div>
       </div>
     </header>
